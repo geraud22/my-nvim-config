@@ -3,12 +3,19 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'ray-x/go.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'morhetz/gruvbox'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'onsails/lspkind-nvim'
 call plug#end()
 lua require('gopls-config')
+lua require('nvim-cmp')
 
 let g:gruvbox_bold = '1'
 let g:gruvbox_transparent_bg = '1'

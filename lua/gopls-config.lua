@@ -25,19 +25,22 @@ local on_attach = function(client, bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
-
-nvim_lsp.gopls.setup{
-	cmd = {'gopls'},
-	capabilities = capabilities,
-	  settings = {
-	    gopls = {
-		    experimentalPostfixCompletions = true,
-		    analyses = {
-			unusedparams = true,
-			shadow = true,
-		    },
-		    staticcheck = true,
-	    },
-	  },
-	  on_attach = on_attach,
+nvim_lsp.gopls.setup {
+    on_attach = function(client, bufnr)
+        require('lsp_signature').on_attach() 
+    end,
+    flags = {
+        debounce_text_changes = 150,
+    }
 }
+
+require('cmp').setup({
+    sources = {
+        { name = 'nvim_lsp' },  
+    },
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+})

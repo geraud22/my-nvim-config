@@ -9,5 +9,14 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'morhetz/gruvbox'
 call plug#end()
 lua require('gopls-config')
-syntax on
-set background=dark
+
+let g:gruvbox_bold = '1'
+let g:gruvbox_transparent_bg = '1'
+let g:gruvbox_italic = '1'
+let g:gruvbox_underline = '1'
+let g:gruvbox_improved_warnings = '1'
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_italicize_strings = '0'
+let g:gruvbox_improved_strings = '0'
+
+colorscheme gruvbox

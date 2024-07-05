@@ -36,3 +36,4 @@ let g:gruvbox_italicize_strings = '0'
 let g:gruvbox_improved_strings = '0'
 
 colorscheme gruvbox
+set clipboard=unnamedplus

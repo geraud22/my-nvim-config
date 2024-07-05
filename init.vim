@@ -37,4 +37,4 @@ let g:gruvbox_improved_strings = '0'
 
 colorscheme gruvbox
 set clipboard=unnamedplus
-nnoremap <leader>c "+y
+nnoremap <leader>y "+y

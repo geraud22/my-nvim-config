@@ -19,6 +19,7 @@ Plug 'sindrets/diffview.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 lua require('gopls-config')
 lua require('nvim-cmp')

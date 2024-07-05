@@ -13,6 +13,9 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'onsails/lspkind-nvim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rhubarb'
+Plug 'sindrets/diffview.nvim'
 call plug#end()
 lua require('gopls-config')
 lua require('nvim-cmp')

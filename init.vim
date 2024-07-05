@@ -16,6 +16,7 @@ Plug 'onsails/lspkind-nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 Plug 'sindrets/diffview.nvim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 lua require('gopls-config')
 lua require('nvim-cmp')

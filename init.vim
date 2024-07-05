@@ -17,9 +17,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 Plug 'sindrets/diffview.nvim'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 lua require('gopls-config')
 lua require('nvim-cmp')
+lua << EOF
+require('fzf-config').setup()
+EOF
 
 let g:gruvbox_bold = '1'
 let g:gruvbox_transparent_bg = '1'

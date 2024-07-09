@@ -24,14 +24,7 @@ call plug#end()
 lua require('nvim-cmp')
 lua << EOF
 require('fzf-config').setup()
-local lspconfig = require('lspconfig')
-local lsp_setup = require('my_lsp_config')
-lspconfig.gopls.setup {
-	on_attach = lsp_setup.on_attach,
-	flags = {
-		debounce_text_changes = 150,
-		},
-	}
+require('gopls').setup()
 EOF
 
 let g:gruvbox_bold = '1'
@@ -45,4 +38,8 @@ let g:gruvbox_improved_strings = '0'
 
 colorscheme gruvbox
 set clipboard=unnamedplus
-nnoremap <leader>y "+y
+nnoremap <leader>y +y
+nnoremap <C-Q> <C-V>
+vnoremap <C-Q> <C-V>
+inoremap <C-Q> <C-V>
+cnoremap <C-Q> <C-V>

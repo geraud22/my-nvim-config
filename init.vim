@@ -21,10 +21,17 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
-lua require('gopls-config')
 lua require('nvim-cmp')
 lua << EOF
 require('fzf-config').setup()
+local lspconfig = require('lspconfig')
+local lsp_setup = require('my_lsp_config')
+lspconfig.gopls.setup {
+	on_attach = lsp_setup.on_attach,
+	flags = {
+		debounce_text_changes = 150,
+		},
+	}
 EOF
 
 let g:gruvbox_bold = '1'

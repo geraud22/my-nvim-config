@@ -1,9 +1,6 @@
-local nvim_lsp = require('lspconfig')
-local ls = require('luasnip')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local M = {}
 
-local on_attach = function(client, bufnr)	  
+M.on_attach = function(client, bufnr)	  
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -26,13 +23,4 @@ local on_attach = function(client, bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
-nvim_lsp.gopls.setup {
-    on_attach = function(client, bufnr)
-        require('lsp_signature').on_attach() 
-    end,
-    flags = {
-        debounce_text_changes = 150,
-    }
-}
-
-
+return M

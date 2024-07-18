@@ -22,6 +22,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 lua require('nvim-cmp')
+lua require('tsserver')
 lua << EOF
 require('fzf-config').setup()
 require('gopls').setup()

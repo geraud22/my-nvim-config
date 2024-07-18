@@ -31,6 +31,7 @@ cmp.setup({
                 fallback()
             end
         end,
+	['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },   -- Language Server Protocol
@@ -39,6 +40,16 @@ cmp.setup({
         { name = 'path' },       -- File system paths
     }),
     formatting = {
-        format = lspkind.cmp_format({ maxwidth = 50, ellipsis_char = '...' }),
+        format = lspkind.cmp_format({ 
+		maxwidth = 50, 
+		ellipsis_char = '...',
+		with_text = true,
+		menu = {
+			buffer = "[Buffer]",
+			nvim_lsp = "[LSP]",
+			path = "[Path]",
+			luasnip = "[LuaSnip]"
+		},
+	}),
     },
 })

@@ -39,6 +39,7 @@ let g:gruvbox_improved_strings = '0'
 
 colorscheme gruvbox
 set clipboard=unnamedplus
+set number relativenumber
 nnoremap <leader>y +y
 nnoremap <C-Q> <C-V>
 vnoremap <C-Q> <C-V>

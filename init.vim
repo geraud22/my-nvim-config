@@ -37,6 +37,8 @@ let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_italicize_strings = '0'
 let g:gruvbox_improved_strings = '0'
 
+let g:go_template_autocreate = 0
+
 colorscheme gruvbox
 set clipboard=unnamedplus
 set number relativenumber
@@ -45,3 +47,4 @@ nnoremap <C-Q> <C-V>
 vnoremap <C-Q> <C-V>
 inoremap <C-Q> <C-V>
 cnoremap <C-Q> <C-V>
+nnoremap <silent> <Esc> :nohlsearch<CR>

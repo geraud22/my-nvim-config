@@ -20,6 +20,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'vim-autoformat/vim-autoformat'
+Plug 'vim-scripts/netrw'
 call plug#end()
 lua require('nvim-cmp')
 lua require('tsserver')
@@ -27,6 +29,11 @@ lua << EOF
 require('fzf-config').setup()
 require('gopls').setup()
 EOF
+
+autocmd BufWrite *.json :Autoformat
+
+let g:formatdef_jq = '"jq ."'
+let g:formatters_json = ['jq']
 
 let g:gruvbox_bold = '1'
 let g:gruvbox_transparent_bg = '1'

@@ -21,10 +21,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-autoformat/vim-autoformat'
-Plug 'vim-scripts/netrw'
+Plug 'tpope/vim-vinegar'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 lua require('nvim-cmp')
 lua require('tsserver')
+lua require('treesitter')
 lua << EOF
 require('fzf-config').setup()
 require('gopls').setup()
@@ -45,6 +47,12 @@ let g:gruvbox_italicize_strings = '0'
 let g:gruvbox_improved_strings = '0'
 
 let g:go_template_autocreate = 0
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
 colorscheme gruvbox
 set clipboard=unnamedplus

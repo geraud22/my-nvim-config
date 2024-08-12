@@ -23,13 +23,36 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-autoformat/vim-autoformat'
 Plug 'tpope/vim-vinegar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" C/C++ Plugins
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'jayp0521/mason-nvim-dap.nvim'
+Plug 'VonHeikemen/lsp-zero.nvim', { 'branch': 'v1.x' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'rcarriga/nvim-notify'
+Plug 'nvim-neotest/nvim-nio'
 call plug#end()
 lua require('nvim-cmp')
 lua require('tsserver')
 lua require('treesitter')
+lua require('mason-lsp')
+lua require('dap-debug')
 lua << EOF
 require('fzf-config').setup()
 require('gopls').setup()
+vim.cmd([[
+  augroup fmt
+    autocmd!
+    autocmd BufWritePre *.c,*.cpp,*.h undojoin | Neoformat
+  augroup END
+]])
+require('notify').setup({
+  stages = "fade_in_slide_out",
+  timeout = 3000,
+})
+vim.notify = require("notify")
 EOF
 
 autocmd BufWrite *.json :Autoformat

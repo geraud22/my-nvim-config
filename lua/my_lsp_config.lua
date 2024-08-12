@@ -21,6 +21,29 @@ M.on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-end
+  
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      vim.diagnostic.open_float(nil, { 
+	      focus = false,
+	      width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
+      })
+    end,
+  })
+end 
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    source = "always",
+    border = "rounded",
+  },
+})
+
+vim.o.updatetime = 1000
 
 return M

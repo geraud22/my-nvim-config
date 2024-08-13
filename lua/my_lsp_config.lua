@@ -1,5 +1,8 @@
 local M = {}
 
+local hover_open = false
+local diagnostic_open = false
+
 M.on_attach = function(client, bufnr)	  
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -7,7 +10,7 @@ M.on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true}
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua require("my_lsp_config").toggle_hover_window()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help)<CR>', opts)
   buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -25,13 +28,50 @@ M.on_attach = function(client, bufnr)
   vim.api.nvim_create_autocmd("CursorHold", {
     buffer = bufnr,
     callback = function()
-      vim.diagnostic.open_float(nil, { 
-	      focus = false,
-	      width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
-      })
+	    if not hover_open then
+        	vim.diagnostic.open_float(nil, { 
+	      		focus = false,
+	      		width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
+      		})
+		diagnostic_open = true
+		end
     end,
   })
+
+  vim.api.nvim_create_autocmd("CursorMoved", {
+	  buffer = bufnr,
+	   callback = function()
+		   if hover_open then 
+			   hover_open = false
+			   if diagnostic_open then
+				   vim.diagnostic.open_float(nil, {
+					   focus = false,
+					   width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
+				   })
+			   end
+		   end
+	   end,
+  })
 end 
+
+M.toggle_hover_window = function()
+	if hover_open then 
+		vim.cmd('pclose')
+		hover_open = false
+		if diagnostic_open then
+			vim.diagnostic.open_float(nil, {
+				focus = false,
+				width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
+			})
+			diagnostic_open = true
+		end
+	else 
+		vim.lsp.buf.hover()
+		hover_open = true
+		diagnostic_open = false
+		vim.cmd('pclose')
+	end
+end
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -44,6 +84,6 @@ vim.diagnostic.config({
   },
 })
 
-vim.o.updatetime = 1000
+vim.o.updatetime = 500
 
 return M

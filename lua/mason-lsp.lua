@@ -5,7 +5,7 @@ local custom_on_attach = require('my_lsp_config').on_attach
 
 mason.setup()
 mason_lspconfig.setup({
-	ensure_installed = { 'clangd' },
+	ensure_installed = { 'clangd', 'jsonls' },
 })
 mason_lspconfig.setup_handlers({
 	function(server_name)

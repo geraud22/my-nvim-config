@@ -39,23 +39,17 @@ lua require('tsserver')
 lua require('treesitter')
 lua require('mason-lsp')
 lua require('dap-debug')
+lua require('jsonls')
 lua << EOF
 require('fzf-config').setup()
 require('gopls').setup()
-vim.cmd([[
-  augroup fmt
-    autocmd!
-    autocmd BufWritePre *.c,*.cpp,*.h undojoin | Neoformat
-  augroup END
-]])
+
 require('notify').setup({
   stages = "fade_in_slide_out",
   timeout = 3000,
 })
 vim.notify = require("notify")
 EOF
-
-autocmd BufWrite *.json :Autoformat
 
 let g:formatdef_jq = '"jq ."'
 let g:formatters_json = ['jq']
@@ -86,3 +80,6 @@ vnoremap <C-Q> <C-V>
 inoremap <C-Q> <C-V>
 cnoremap <C-Q> <C-V>
 nnoremap <silent> <Esc> :nohlsearch<CR>
+
+
+

@@ -1,7 +1,7 @@
 local lspconfig = require('lspconfig')
 local lsp_setup = require('my_lsp_config')
 
-lspconfig.tsserver.setup{
+lspconfig.ts_ls.setup{
 	on_attach = function(client, bufnr)
 		lsp_setup.on_attach(client, bufnr)
 		if client.server_capabilities.documentFormattingProvider then

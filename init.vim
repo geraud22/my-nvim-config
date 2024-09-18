@@ -74,6 +74,7 @@ let g:netrw_winsize = 25
 colorscheme gruvbox
 set clipboard=unnamedplus
 set number relativenumber
+set cursorline
 nnoremap <leader>y +y
 nnoremap <C-Q> <C-V>
 vnoremap <C-Q> <C-V>

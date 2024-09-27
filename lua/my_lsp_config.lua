@@ -54,6 +54,10 @@ M.on_attach = function(client, bufnr)
   })
 end 
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded", -- You can also use "single", "double", "solid", etc.
+})
+
 M.toggle_hover_window = function()
 	if hover_open then 
 		vim.cmd('pclose')

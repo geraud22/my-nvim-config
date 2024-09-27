@@ -9,6 +9,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'ray-x/go.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'morhetz/gruvbox'
+Plug 'bluz71/vim-nightfly-colors', { 'as': 'nightfly' }
+Plug 'scottmckendry/cyberdream.nvim', { 'as': 'cyberdream' }
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
@@ -40,10 +42,11 @@ lua require('treesitter')
 lua require('mason-lsp')
 lua require('dap-debug')
 lua require('jsonls')
+lua require('themes/nightfly_init')
+lua require('themes/cyberdream_init')
 lua << EOF
 require('fzf-config').setup()
 require('gopls').setup()
-
 require('notify').setup({
   stages = "fade_in_slide_out",
   timeout = 3000,
@@ -71,7 +74,7 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
-colorscheme gruvbox
+colorscheme cyberdream
 set clipboard=unnamedplus
 set number relativenumber
 set cursorline
@@ -81,6 +84,4 @@ vnoremap <C-Q> <C-V>
 inoremap <C-Q> <C-V>
 cnoremap <C-Q> <C-V>
 nnoremap <silent> <Esc> :nohlsearch<CR>
-
-
-
+autocmd BufWritePost * let save_pos = getpos(".") | silent! write | call setpos('.', save_pos)

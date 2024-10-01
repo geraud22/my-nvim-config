@@ -25,7 +25,7 @@ require("cyberdream").setup({
             -- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
 
             -- Example:
-            Comment = { fg = "#E10600", bg = "NONE", italic = true },
+            Comment = { fg = "#FF8000", bg = "NONE", italic = true },
 	    FloatBorder = { fg = "#5EFF6C", bg = "NONE" },
 	    Visual = { bg = "#16181A" },
 	    Keyword = { fg = "#5EF1FF" },

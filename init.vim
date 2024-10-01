@@ -44,9 +44,9 @@ lua require('dap-debug')
 lua require('jsonls')
 lua require('themes/nightfly_init')
 lua require('themes/cyberdream_init')
+lua require('omnisharp').setup()
 lua << EOF
 require('fzf-config').setup()
-require('gopls').setup()
 require('notify').setup({
   stages = "fade_in_slide_out",
   timeout = 3000,

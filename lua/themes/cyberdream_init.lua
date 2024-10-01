@@ -27,8 +27,9 @@ require("cyberdream").setup({
             -- Example:
             Comment = { fg = "#E10600", bg = "NONE", italic = true },
 	    FloatBorder = { fg = "#5EFF6C", bg = "NONE" },
-	    Visual = { bg = "#16181A" }
-
+	    Visual = { bg = "#16181A" },
+	    Keyword = { fg = "#5EF1FF" },
+	    Statement = { fg = "#5EA1FF" },
             -- Complete list can be found in `lua/cyberdream/theme.lua`
         },
     },

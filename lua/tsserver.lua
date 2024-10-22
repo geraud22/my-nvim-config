@@ -31,6 +31,7 @@ lspconfig.ts_ls.setup{
             		},
         	},
 	},
+	root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
 	capabilities = require('cmp_nvim_lsp').default_capabilities(),
 	filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" }
 }
@@ -52,7 +53,6 @@ lspconfig.volar.setup {
 			}
 		}, bufnr)
 	end,
-
 	capabilities = require('cmp_nvim_lsp').default_capabilities(),
 	filetypes = { "vue" }
 }

@@ -7,7 +7,7 @@ local gopls_custom = require('my_gopls_setup')
 mason.setup()
 
 mason_lspconfig.setup({
-    ensure_installed = { 'clangd', 'jsonls', 'gopls' },
+    ensure_installed = { 'clangd', 'jsonls', 'gopls', 'html' },
 })
 
 mason_lspconfig.setup_handlers({
@@ -20,4 +20,8 @@ mason_lspconfig.setup_handlers({
     ['gopls'] = function()
         gopls_custom.setup()
     end,
+})
+
+lspconfig.html.setup({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })

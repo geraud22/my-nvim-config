@@ -35,6 +35,7 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'nvim-neotest/nvim-nio'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 call plug#end()
 lua require('nvim-cmp')
 lua require('tsserver')
@@ -45,6 +46,7 @@ lua require('jsonls')
 lua require('themes/nightfly_init')
 lua require('themes/cyberdream_init')
 lua require('omnisharp').setup()
+lua require('prettier_null_ls').setup()
 lua << EOF
 require('fzf-config').setup()
 require('notify').setup({

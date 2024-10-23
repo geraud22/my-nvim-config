@@ -54,6 +54,7 @@ require('notify').setup({
   stages = "fade_in_slide_out",
   timeout = 3000,
 })
+--require('luasnip.loaders.from_vscode').lazy_load({ paths = {'~/.config/nvim/snippets/'} })
 vim.notify = require("notify")
 EOF
 

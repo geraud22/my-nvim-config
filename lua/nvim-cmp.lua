@@ -40,8 +40,8 @@ cmp.setup({
         { name = 'path' },       -- File system paths
     }),
     formatting = {
-        format = lspkind.cmp_format({ 
-		maxwidth = 50, 
+        format = lspkind.cmp_format({
+		maxwidth = 50,
 		ellipsis_char = '...',
 		with_text = true,
 		menu = {
@@ -53,3 +53,28 @@ cmp.setup({
 	}),
     },
 })
+
+luasnip.add_snippets("vue", {
+    luasnip.parser.parse_snippet("vueinit", [[
+				<template>
+				  <div>
+				    $0
+				  </div>
+				</template>
+				
+				<script lang="ts">
+				export default {
+				  name: "$1",
+				  data() {
+				    return {
+
+				    }
+				  },
+				}
+				</script>
+				
+				<style scoped>
+
+				</style>
+				]])
+	})

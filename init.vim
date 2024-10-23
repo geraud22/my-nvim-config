@@ -46,7 +46,7 @@ lua require('jsonls')
 lua require('themes/nightfly_init')
 lua require('themes/cyberdream_init')
 lua require('omnisharp').setup()
-lua require('prettier_null_ls').setup()
+lua require('null_ls').setup()
 lua require('html_linting').setup()
 lua << EOF
 require('fzf-config').setup()

@@ -88,4 +88,5 @@ vnoremap <C-Q> <C-V>
 inoremap <C-Q> <C-V>
 cnoremap <C-Q> <C-V>
 nnoremap <silent> <Esc> :nohlsearch<CR>
+nnoremap <leader>h :echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name")<CR>
 autocmd BufWritePost * let save_pos = getpos(".") | silent! write | call setpos('.', save_pos)

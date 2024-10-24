@@ -1,36 +1,55 @@
+-- Load the theme and setup the default highlight configuration
 require("cyberdream").setup({
-    -- Enable transparent background
     transparent = true,
-
-    -- Enable italics comments
     italic_comments = false,
-
-    -- Replace all fillchars with ' ' for the ultimate clean look
     hide_fillchars = true,
-
-    -- Modern borderless telescope theme - also applies to fzf-lua
     borderless_telescope = true,
-
-    -- Set terminal colors used in `:terminal`
     terminal_colors = true,
-
-    -- Use caching to improve performance - WARNING: experimental feature - expect the unexpected!
-    -- Early testing shows a 60-70% improvement in startup time. YMMV. Disables dynamic light/dark theme switching.
-    cache = false, -- generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
-
+    cache = false,
     theme = {
-        variant = "default", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
-        highlights = {
-            -- Highlight groups to override, adding new groups is also possible
-            -- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
-
-            -- Example:
-            Comment = { fg = "#FF8000", bg = "NONE", italic = true },
-	    FloatBorder = { fg = "#5EFF6C", bg = "NONE" },
-	    Visual = { bg = "#16181A" },
-	    Keyword = { fg = "#5EF1FF" },
-	    Statement = { fg = "#5EA1FF" },
-            -- Complete list can be found in `lua/cyberdream/theme.lua`
-        },
+        variant = "default",
     },
 })
+
+-- Function to apply custom highlights for Go files
+local function apply_go_highlights()
+    vim.cmd [[
+        highlight Comment guifg=#FF8000 guibg=NONE gui=italic
+        highlight FloatBorder guifg=#5EFF6C guibg=NONE
+        highlight Visual guibg=#16181A
+        highlight Keyword guifg=#5EF1FF
+        highlight Statement guifg=#5EA1FF
+    ]]
+end
+
+-- Function to reset to the theme's default highlights
+local function reset_highlights()
+    vim.cmd [[
+        highlight clear Comment
+        highlight clear FloatBorder
+        highlight clear Visual
+        highlight clear Keyword
+        highlight clear Statement
+        " Optionally reload the theme to reset everything
+        colorscheme cyberdream
+	highlight Special guifg=#FC4C02
+    ]]
+end
+
+-- Auto command to apply highlights for Go files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "go",
+    callback = apply_go_highlights,
+})
+
+-- Auto command to reset to theme defaults for non-Go files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        local filetype = vim.bo.filetype
+        if filetype ~= "go" then
+            reset_highlights()
+        end
+    end,
+})
+

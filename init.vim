@@ -25,7 +25,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-autoformat/vim-autoformat'
 Plug 'tpope/vim-vinegar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" C/C++ Plugins
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'jayp0521/mason-nvim-dap.nvim'
@@ -36,6 +35,7 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'posva/vim-vue'
 call plug#end()
 lua require('nvim-cmp')
 lua require('tsserver')

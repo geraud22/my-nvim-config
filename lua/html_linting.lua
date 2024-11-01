@@ -7,7 +7,7 @@ M.setup = function()
             null_ls.builtins.diagnostics.eslint.with({
                 command = "htmlhint",
                 args = { "--format", "unix", "--stdin", "--stdin-filename", "$FILENAME" },
-                filetypes = { "html" },
+                filetypes = { "html", "templ" },
                 format = "line",
             }),
         },

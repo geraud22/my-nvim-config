@@ -36,6 +36,7 @@ Plug 'rcarriga/nvim-notify'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'posva/vim-vue'
+Plug 'joerdav/templ.vim'
 call plug#end()
 lua require('nvim-cmp')
 lua require('tsserver')
@@ -48,6 +49,9 @@ lua require('themes/cyberdream_init')
 lua require('omnisharp').setup()
 lua require('null_ls').setup()
 lua require('html_linting').setup()
+lua require('templ_lsp').setup()
+lua require('tailwind_lsp').setup()
+lua require('htmx_lsp').setup()
 lua << EOF
 require('fzf-config').setup()
 require('notify').setup({

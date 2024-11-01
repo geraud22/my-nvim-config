@@ -3,7 +3,8 @@ local M = {}
 local hover_open = false
 local diagnostic_open = false
 
-M.on_attach = function(client, bufnr)
+M.on_attach = function(client, bufnr, custom_opts)
+    	custom_opts = custom_opts or {}
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -25,35 +26,36 @@ M.on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
 	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
-	vim.api.nvim_create_autocmd("CursorHold", {
-		buffer = bufnr,
-		callback = function()
-			if not hover_open then
-				vim.diagnostic.open_float(nil, {
-					focus = false,
-					width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
-				})
-				diagnostic_open = true
-			end
-		end,
-	})
+	if custom_opts.show_diagnostics then
+        	vim.api.nvim_create_autocmd("CursorHold", {
+        	    buffer = bufnr,
+        	    callback = function()
+        	        if not hover_open then
+        	            vim.diagnostic.open_float(nil, {
+        	                focus = false,
+        	                width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
+        	            })
+        	            diagnostic_open = true
+        	        end
+        	    end,
+        	})
 
-	vim.api.nvim_create_autocmd("CursorMoved", {
-		buffer = bufnr,
-		callback = function()
-			if hover_open then
-				hover_open = false
-				if diagnostic_open then
-					vim.diagnostic.open_float(nil, {
-						focus = false,
-						width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
-					})
+		vim.api.nvim_create_autocmd("CursorMoved", {
+			buffer = bufnr,
+			callback = function()
+				if hover_open then
+					hover_open = false
+					if diagnostic_open then
+						vim.diagnostic.open_float(nil, {
+							focus = false,
+							width = math.floor(vim.api.nvim_get_option("columns") * 0.9)
+						})
+					end
 				end
-			end
-		end,
-	})
+			end,
+		})
+	end
 end
-
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = "rounded", -- You can also use "single", "double", "solid", etc.
 })

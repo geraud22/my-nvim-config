@@ -33,6 +33,7 @@ local function reset_highlights()
         " Optionally reload the theme to reset everything
         colorscheme cyberdream
 	highlight Special guifg=#FC4C02
+	highlight typescriptBlock guifg=#079FFF
     ]]
 end
 

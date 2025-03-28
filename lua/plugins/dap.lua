@@ -2,6 +2,7 @@ return {
   {
     -- Core DAP plugin
     'mfussenegger/nvim-dap',
+    lazy = true,
     config = function()
       local dap = require 'dap'
       -- Example configuration for Go debugging
@@ -46,10 +47,13 @@ return {
   {
     -- DAP UI plugin for Neovim
     'rcarriga/nvim-dap-ui',
-    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'nvim-neotest/nvim-nio',
+      'theHamsta/nvim-dap-virtual-text',
+    },
     config = function()
       local dap, dapui = require 'dap', require 'dapui'
-
       dapui.setup {
         layouts = {
           {
@@ -102,5 +106,14 @@ return {
         },
       }
     end,
+    keys = {
+      {
+        '<leader>dt',
+        function()
+          require('dap-go').debug_test()
+        end,
+        desc = 'Debug test',
+      },
+    },
   },
 }

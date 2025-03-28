@@ -26,7 +26,7 @@ return {
 
     local sources = {
       diagnostics.checkmake,
-      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown', 'css', 'javascript' } },
+      formatting.prettier.with { filetypes = { 'html', 'json', 'yaml', 'markdown', 'css', 'javascript', 'typescripts', 'javascriptreact', 'typescriptreact' } },
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,

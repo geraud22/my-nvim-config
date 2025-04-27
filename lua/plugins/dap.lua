@@ -1,5 +1,9 @@
 return {
   {
+    'mxsdev/nvim-dap-vscode-js',
+    dependencies = { 'mfussenegger/nvim-dap' },
+  },
+  {
     -- Core DAP plugin
     'mfussenegger/nvim-dap',
     lazy = true,
@@ -40,6 +44,24 @@ return {
           mode = 'remote',
           request = 'attach',
           remotePath = './', -- Remote binary path if needed
+        },
+      }
+      dap.adapters.codelldb = {
+        type = 'server',
+        port = '${port}',
+        executable = {
+          command = 'codelldb',
+          args = { '--port', '${port}' },
+        },
+      }
+      dap.configurations.cpp = {
+        {
+          name = 'Launch',
+          type = 'codelldb',
+          request = 'launch',
+          program = '${workspaceFolder}/${fileBasenameNoExtension}',
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
         },
       }
     end,

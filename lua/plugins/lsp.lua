@@ -154,8 +154,48 @@ return {
     local util = require 'lspconfig.util'
     local async = require 'lspconfig.async'
     local mod_cache = nil
+    local clangd = require 'plugins.lsp-clangd'
     local servers = {
-      -- clangd = {},
+      clangd = {
+        cmd = {
+          'clangd',
+        },
+        filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+        root_dir = function(fname)
+          return util.root_pattern(
+            '.git',
+            '.clangd',
+            '.clang-tidy',
+            '.clang-format',
+            'compile_flags.txt',
+            'compile_commands.json',
+            'configure.ac' -- AutoTools
+          )(fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+        end,
+        single_file_support = true,
+        capabilities = {
+          textDocument = {
+            completion = {
+              editsNearCursor = true,
+            },
+          },
+          offsetEncoding = { 'utf-8', 'utf-16' },
+        },
+        commands = {
+          ClangdSwitchSourceHeader = {
+            function()
+              clangd.switch_source_header(0)
+            end,
+            description = 'Switch between source/header',
+          },
+          ClangdShowSymbolInfo = {
+            function()
+              clangd.symbol_info()
+            end,
+            description = 'Show symbol info',
+          },
+        },
+      },
       gopls = {
         cmd = {
           'gopls',

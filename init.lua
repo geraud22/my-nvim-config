@@ -33,6 +33,7 @@ require('lazy').setup {
   require 'plugins.rustacean',
   require 'plugins.fugitive',
   require 'plugins.overseer',
+  require 'plugins.harpoon',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

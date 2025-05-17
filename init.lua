@@ -30,10 +30,11 @@ require('lazy').setup {
   require 'plugins.misc',
   require 'plugins.comment',
   require 'plugins.dap',
-  require 'plugins.rustacean',
+  -- require 'plugins.rustacean',
   require 'plugins.fugitive',
   require 'plugins.overseer',
   require 'plugins.harpoon',
+  require 'plugins.nvim-java',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

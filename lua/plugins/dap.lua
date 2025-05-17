@@ -1,7 +1,9 @@
 return {
   {
     'mxsdev/nvim-dap-vscode-js',
-    dependencies = { 'mfussenegger/nvim-dap' },
+    dependencies = {
+      'mfussenegger/nvim-dap',
+    },
   },
   {
     -- Core DAP plugin
@@ -64,6 +66,19 @@ return {
           stopOnEntry = false,
         },
       }
+    end,
+  },
+  {
+    'nvim-java/nvim-java',
+    dependencies = { 'mfussenegger/nvim-dap' },
+    ft = { 'java' }, -- load on java files
+    config = function()
+      require('java').setup {
+        dap = { enabled = true, hotcodereplace = 'auto' },
+      }
+
+      -- force it to (re-)register the Java DAP adapter & configs
+      require('java').dap.config_dap()
     end,
   },
   {

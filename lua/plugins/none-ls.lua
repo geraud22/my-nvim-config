@@ -38,6 +38,11 @@ return {
         diagnostics_format = '[#{c}] #{m} (#{s})',
       },
       formatting.goimports,
+      formatting.google_java_format.with {
+        command = 'google-java-format', -- or the full java -jar call if you're using the jar directly
+        filetypes = { 'java' },
+        extra_args = { '--aosp' }, -- optional style flag
+      },
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})

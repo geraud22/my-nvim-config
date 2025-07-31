@@ -45,11 +45,14 @@ return {
     vim.keymap.set('n', '<leader>4', function()
       harpoon:list():select(4)
     end)
-    vim.keymap.set('n', '<C-S-P>', function()
+    vim.keymap.set('n', '<C-P>', function()
       harpoon:list():prev()
     end)
-    vim.keymap.set('n', '<C-S-N>', function()
+    vim.keymap.set('n', '<C-N>', function()
       harpoon:list():next()
+    end)
+    vim.keymap.set('n', '<C-C>', function()
+      harpoon:list():clear()
     end)
   end,
 }

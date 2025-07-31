@@ -13,6 +13,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  callback = function()
+    if vim.bo.ft == 'java' then
+      vim.lsp.buf.code_action {
+        context = { only = { 'source.organizeImports' } },
+        apply = true,
+      }
+    end
+  end,
+})
+
 -- Set up plugins
 require('lazy').setup {
   require 'plugins.neotree',

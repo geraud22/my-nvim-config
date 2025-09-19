@@ -45,6 +45,22 @@ return {
       },
     }
 
+    local gcflags = require 'plugins.none-ls-gcflags'
+
+    local enabled = false
+
+    vim.keymap.set('n', '<leader>g', function()
+      if enabled then
+        gcflags.clear()
+        vim.notify 'Cleared gcflags diagnostics'
+        enabled = false
+      else
+        gcflags.run()
+        vim.notify 'Running gcflags diagnostics...'
+        enabled = true
+      end
+    end, { desc = 'Toggle gcflags diagnostics' })
+
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
     null_ls.setup {
       -- debug = true, -- Enable debug mode. Inspect logs with :NullLsLog.

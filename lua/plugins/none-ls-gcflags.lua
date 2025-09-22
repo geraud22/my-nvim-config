@@ -4,14 +4,19 @@ M.run = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local filepath = vim.api.nvim_buf_get_name(bufnr)
   local ns = vim.api.nvim_create_namespace 'gcflags'
+  local dir = vim.fn.fnamemodify(filepath, ':h')
 
   -- run the command
-  local handle = io.popen('go build -gcflags=-m ' .. filepath .. ' 2>&1')
+  local handle = io.popen('cd ' .. dir .. ' && go build -gcflags=-m 2>&1')
   if not handle then
     return
   end
-  local result = handle:read '*a'
+  local result_lines = {}
+  for line in handle:lines() do
+    table.insert(result_lines, line)
+  end
   handle:close()
+  local result = table.concat(result_lines, '\n')
 
   if not result or result == '' then
     vim.notify 'No gcflags output.'
@@ -26,7 +31,8 @@ M.run = function()
   for _, line in ipairs(vim.split(result, '\n')) do
     if line ~= '' then
       local parts = vim.split(line, ':')
-      if #parts >= 3 and string.find(filepath, parts[1], 1, true) then
+      local filename = parts[1]:gsub('^%./', '')
+      if #parts >= 3 and string.find(filepath, filename, 1, true) then
         -- first 3 parts: file, line, col
         local lnum = tonumber(parts[2])
         local col = tonumber(parts[3])

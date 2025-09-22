@@ -22,14 +22,11 @@ M.run = function()
   -- parse output
   local diags = {}
   local current_diag = nil
-  local bufnr = vim.api.nvim_get_current_buf()
-  local bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':t') -- just the file name
-  local ns = vim.api.nvim_create_namespace 'gcflags'
 
   for _, line in ipairs(vim.split(result, '\n')) do
     if line ~= '' then
       local parts = vim.split(line, ':')
-      if #parts >= 3 and parts[1]:find(bufname, 1, true) then
+      if #parts >= 3 and string.find(filepath, parts[1], 1, true) then
         -- first 3 parts: file, line, col
         local lnum = tonumber(parts[2])
         local col = tonumber(parts[3])
@@ -40,7 +37,7 @@ M.run = function()
           end
           -- start new diagnostic
           current_diag = {
-            row = lnum - 1,
+            lnum = lnum - 1,
             col = col - 1,
             source = 'gcflags',
             message = table.concat(parts, ':', 4),

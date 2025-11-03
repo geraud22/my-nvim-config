@@ -1,0 +1,6 @@
+vim.keymap.set("n", "<leader>e", ":Lexplore<CR>")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<C-v>", '"+p')
+vim.keymap.set("v", "<C-c>", '"+y')
+vim.keymap.set("v", "<C-c>", '"+y')

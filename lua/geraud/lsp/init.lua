@@ -28,7 +28,14 @@ autocmd('LspAttach', {
         vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = event.buf,
             callback = function() 
-                vim.lsp.buf.format({ async = false, id = event.data.client_id })
+                local client = vim.lsp.get_client_by_id(event.data.client_id)
+                if client and client.supports_method("textDocument/formatting") then 
+                    vim.lsp.buf.format({ 
+                        async = false, 
+                        id = event.data.client_id,
+                        position_encoding = client.offset_encoding or "utf-16",
+                    })
+                end
             end,
         })
     end

@@ -4,6 +4,9 @@ vim.opt.mousehide = true
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 

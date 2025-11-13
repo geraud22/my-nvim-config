@@ -1,3 +1,11 @@
+local autocmd = vim.api.nvim_create_autocmd
+autocmd({'LspAttach', 'BufReadPost', 'FileReadPost'}, {
+    group = vim.api.nvim_create_augroup("Folds", { clear = true }),
+    callback = function(event) 
+        vim.cmd("normal! zR")
+    end
+})
+
 return {
     'nvim-treesitter/nvim-treesitter',
     config = function()

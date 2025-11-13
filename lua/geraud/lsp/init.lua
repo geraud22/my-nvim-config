@@ -7,6 +7,9 @@ vim.lsp.enable('pylsp')
 local rustlsp = require("geraud.lsp.rust-analyzer")
 vim.lsp.config('rust-analyzer', rustlsp)
 vim.lsp.enable('rust-analyzer')
+local superhtml = require("geraud.lsp.superhtml")
+vim.lsp.config('superhtml', superhtml)
+vim.lsp.enable('superhtml')
 
 local autocmd = vim.api.nvim_create_autocmd
 

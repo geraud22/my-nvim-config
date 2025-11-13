@@ -40,6 +40,33 @@ return {
           "unlinked-file",
         },
       },
+      cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+      },
+      -- Add clippy lints for Rust.
+      checkOnSave = true,
+      check = {
+          allFeatures = true,
+          command = "clippy",
+          extraArgs = {
+              "--",
+              "--no-deps",
+              "-Dclippy::correctness",
+              "-Dclippy::complexity",
+              "-Wclippy::perf",
+              "-Wclippy::pedantic",
+          },
+      },
+      procMacro = {
+          enable = true,
+          ignored = {
+              ["async-trait"] = { "async_trait" },
+              ["napi-derive"] = { "napi" },
+              ["async-recursion"] = { "async_recursion" },
+          },
+	  },
     },
   },
   root_dir = function(bufnr, on_dir)

@@ -78,8 +78,9 @@ return {
                 style = "minimal",
                 border = "rounded",
                 source = "always",
-                header = "",
-                prefix = "",
+            },
+            virtual_text = {
+                source = true,
             },
         })
     end,

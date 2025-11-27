@@ -10,6 +10,9 @@ vim.lsp.enable('rust-analyzer')
 local superhtml = require("geraud.lsp.superhtml")
 vim.lsp.config('superhtml', superhtml)
 vim.lsp.enable('superhtml')
+local jsonls = require("geraud.lsp.jsonls")
+vim.lsp.config('jsonls', jsonls)
+vim.lsp.enable('jsonls')
 
 local autocmd = vim.api.nvim_create_autocmd
 

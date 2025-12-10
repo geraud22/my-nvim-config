@@ -13,6 +13,9 @@ vim.lsp.enable('superhtml')
 local jsonls = require("geraud.lsp.jsonls")
 vim.lsp.config('jsonls', jsonls)
 vim.lsp.enable('jsonls')
+local html = require("geraud.lsp.html")
+vim.lsp.config('html', html)
+vim.lsp.enable('html')
 
 local autocmd = vim.api.nvim_create_autocmd
 

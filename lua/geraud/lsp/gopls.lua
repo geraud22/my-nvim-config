@@ -17,13 +17,13 @@ autocmd("BufWritePre", {
     end
 })
 
-autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = "*.html",
-    callback = function()
-        vim.bo.filetype = "gotmpl"
-        vim.cmd("TSBufEnable highlight")
-    end,
-})
+-- autocmd({ "BufRead", "BufNewFile" }, {
+--     pattern = "*.html",
+--     callback = function()
+--         vim.bo.filetype = "gotmpl"
+--         vim.cmd("TSBufEnable highlight")
+--     end,
+-- })
 
 
 return {

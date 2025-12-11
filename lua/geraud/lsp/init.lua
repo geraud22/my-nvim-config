@@ -16,6 +16,9 @@ vim.lsp.enable('jsonls')
 local html = require("geraud.lsp.html")
 vim.lsp.config('html', html)
 vim.lsp.enable('html')
+local eslint = require('geraud.lsp.eslint')
+vim.lsp.config('eslint', eslint)
+vim.lsp.enable('eslint')
 
 local autocmd = vim.api.nvim_create_autocmd
 

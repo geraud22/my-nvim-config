@@ -16,6 +16,9 @@ vim.lsp.enable('html')
 local eslint = require('geraud.lsp.eslint')
 vim.lsp.config('eslint', eslint)
 vim.lsp.enable('eslint')
+local dotnet = require('geraud.lsp.dotnet')
+vim.lsp.config('dotnet', dotnet)
+vim.lsp.enable('dotnet')
 
 local autocmd = vim.api.nvim_create_autocmd
 

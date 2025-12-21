@@ -72,6 +72,7 @@ return {
                 { name = 'path' },
                 { name = 'buffer' },
                 { name = 'crates' },
+                { name = 'easy-dotnet' },
             })
         })
         vim.diagnostic.config({

@@ -1,9 +1,11 @@
 -- lazy.nvim
-{
+return {
   "GustavEikaas/easy-dotnet.nvim",
   -- 'nvim-telescope/telescope.nvim' or 'ibhagwan/fzf-lua' or 'folke/snacks.nvim'
   -- are highly recommended for a better experience
   dependencies = { "nvim-lua/plenary.nvim", 'nvim-telescope/telescope.nvim', },
+  root_markers = { "*.sln", "*.csproj", "*.fsproj", "global.json", ".git" },
+  filetypes = {"cs", "csproj"},
   config = function()
     local dotnet = require("easy-dotnet")
     -- Options are not required

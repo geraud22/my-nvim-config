@@ -16,6 +16,8 @@ return {
         local cmp = require('cmp')
         local cmp_lsp = require('cmp_nvim_lsp')
         local luasnip = require('luasnip')
+        cmp.register_source("easy-dotnet",
+            require("easy-dotnet").package_completion_source)
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},

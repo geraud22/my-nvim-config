@@ -1,5 +1,5 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-return {
+-- @type vim.lsp.Config
+local config = {
   cmd = { 'vscode-html-language-server', '--stdio' },
   filetypes = { 'html', 'templ' },
   root_markers = { 'package.json', '.git' },
@@ -11,3 +11,5 @@ return {
     configurationSection = { 'html', 'css', 'javascript' },
   },
 }
+vim.lsp.config('html', config)
+vim.lsp.enable('html')

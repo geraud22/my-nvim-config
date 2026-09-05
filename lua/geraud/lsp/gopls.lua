@@ -17,18 +17,12 @@ autocmd("BufWritePre", {
     end
 })
 
--- autocmd({ "BufRead", "BufNewFile" }, {
---     pattern = "*.html",
---     callback = function()
---         vim.bo.filetype = "gotmpl"
---         vim.cmd("TSBufEnable highlight")
---     end,
--- })
-
-
-return {
+--@type vim.lsp.Config
+local config = {
     name = 'gopls',
     cmd = {'gopls'},
     root_markers = {'.git', {'go.mod', 'go.sum'}},
     filetypes = {'go', 'gotmpl', 'gomod', 'gowork'},
 }
+vim.lsp.config('gopls', config)
+vim.lsp.enable('gopls')

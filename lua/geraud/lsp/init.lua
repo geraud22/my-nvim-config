@@ -1,6 +1,6 @@
-local gopls = require("geraud.lsp.gopls")
-vim.lsp.config('gopls', gopls)
-vim.lsp.enable('gopls')
+require("geraud.lsp.lua_ls")
+require("geraud.lsp.gopls")
+require("geraud.lsp.html")
 local pylsp = require("geraud.lsp.pylsp")
 vim.lsp.config('pylsp', pylsp)
 vim.lsp.enable('pylsp')
@@ -10,9 +10,6 @@ vim.lsp.enable('rust-analyzer')
 local jsonls = require("geraud.lsp.jsonls")
 vim.lsp.config('jsonls', jsonls)
 vim.lsp.enable('jsonls')
-local html = require("geraud.lsp.html")
-vim.lsp.config('html', html)
-vim.lsp.enable('html')
 local eslint = require('geraud.lsp.eslint')
 vim.lsp.config('eslint', eslint)
 vim.lsp.enable('eslint')
@@ -38,7 +35,7 @@ autocmd('LspAttach', {
             buffer = event.buf,
             callback = function() 
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client.supports_method("textDocument/formatting") then 
+                if client and client:supports_method("textDocument/formatting") then 
                     vim.lsp.buf.format({ 
                         async = false, 
                         id = event.data.client_id,
@@ -48,4 +45,26 @@ autocmd('LspAttach', {
             end,
         })
     end
+})
+
+vim.opt.completeopt = "menu,menuone,noselect,popup" -- Ensures the menu appears even for a single match and uses the native popup window.
+vim.o.autocomplete = true -- Enables the overall completion feature.
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("LspCompletion", { clear = true }),
+  callback = function(args)
+    local client_id = args.data.client_id
+    if not client_id then
+      return
+    end
+
+    local client = vim.lsp.get_client_by_id(client_id)
+    if client and client:supports_method("textDocument/completion") then
+      -- Enable native LSP completion for this client + buffer
+      vim.lsp.completion.enable(true, client_id, args.buf, {
+        autotrigger = true,   -- auto-show menu as you type (recommended)
+        -- You can also set { autotrigger = false } and trigger manually with <C-x><C-o>
+      })
+    end
+  end,
 })

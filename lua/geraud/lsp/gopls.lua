@@ -23,6 +23,11 @@ local config = {
     cmd = {'gopls'},
     root_markers = {'.git', {'go.mod', 'go.sum'}},
     filetypes = {'go', 'gotmpl', 'gomod', 'gowork'},
+    settings = {
+        gopls = {
+            semanticTokens = true,
+        },
+    },
 }
 vim.lsp.config('gopls', config)
 vim.lsp.enable('gopls')

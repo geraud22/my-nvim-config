@@ -34,3 +34,12 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+-- Make use of native completions since v0.12
+vim.o.autocomplete = true -- Enables Neovim 0.12 auto-triggering
+vim.o.autocompletedelay = 250 -- Milliseconds delay before popping up
+
+-- menuone: show menu even if there is only 1 match
+-- noselect: don't automatically insert text until you press Tab or select it
+-- fuzzy: use 0.12's new native fuzzy matching engine
+vim.opt.completeopt = "menu,menuone,noselect,fuzzy"

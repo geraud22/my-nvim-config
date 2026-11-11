@@ -4,15 +4,16 @@ require("geraud.lsp.html")
 local pylsp = require("geraud.lsp.pylsp")
 vim.lsp.config("pylsp", pylsp)
 vim.lsp.enable("pylsp")
--- local rustlsp = require("geraud.lsp.rust-analyzer")
--- vim.lsp.config('rust-analyzer', rustlsp)
--- vim.lsp.enable('rust-analyzer')
 local jsonls = require("geraud.lsp.jsonls")
 vim.lsp.config("jsonls", jsonls)
 vim.lsp.enable("jsonls")
 local eslint = require("geraud.lsp.eslint")
 vim.lsp.config("eslint", eslint)
 vim.lsp.enable("eslint")
+
+local bufls = require("geraud.lsp.buf")
+vim.lsp.config("buf_ls", bufls)
+vim.lsp.enable("buf_ls")
 
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -22,8 +23,6 @@ autocmd("LspAttach", {
 		local opts = { buffer = event.buf }
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	end,
 })

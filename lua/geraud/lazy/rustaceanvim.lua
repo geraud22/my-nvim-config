@@ -13,6 +13,20 @@ return {
 		local cfg = require("rustaceanvim.config")
 		vim.g.rustaceanvim = {
 			server = {
+                default_settings = {
+                    ['rust-analyzer'] = {
+                        cargo = {
+                            allFeatures = true,
+                            loadOutDirsFromCheck = true,
+                        },
+                        procMacro = {
+                            enable = true,
+                        },
+                        diagnostics = {
+                            disabled = { "macro-error", "unresolved-macro-call" },
+                        },
+                    },
+                },
 				on_attach = function(client, bufnr)
 					vim.keymap.set("n", "K", function()
 						vim.cmd.RustLsp({ "hover", "actions" })

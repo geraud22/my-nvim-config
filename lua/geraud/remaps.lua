@@ -4,6 +4,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<C-v>", '"+p')
 vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set("v", "<C-c>", '"+y')
+vim.keymap.set("n", "<leader>h", ":split<CR>")
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>l", function()
 	for _, c in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
 		vim.lsp.buf_detach_client(0, c.id)

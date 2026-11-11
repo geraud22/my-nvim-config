@@ -21,11 +21,12 @@ autocmd("BufWritePre", {
 local config = {
     name = 'gopls',
     cmd = {'gopls'},
+    cmd_env = { GOFUMPT_SPLIT_LONG_LINES = "on" },
     root_markers = {'.git', {'go.mod', 'go.sum'}},
     filetypes = {'go', 'gotmpl', 'gomod', 'gowork'},
     settings = {
         gopls = {
-            semanticTokens = true,
+            gofumpt = true,
         },
     },
 }
